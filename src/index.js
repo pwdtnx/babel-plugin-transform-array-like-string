@@ -48,6 +48,18 @@ export default function({ types: t, template }) {
       });
     };
   })();
+  const buildIdentifierProperty = (() => {
+    const tmpl = template(`ISSTRINGOBJECT && ISINDEXPROPERTY ? STRING.charAt(PROPERTY) : MEMBEREXPRESSION`);
+    return (expr) => {
+      return tmpl({
+        STRING: expr.object,
+        PROPERTY: expr.property,
+        MEMBEREXPRESSION: expr,
+        ISSTRINGOBJECT: buildIsString({ V: expr.object }),
+        ISINDEXPROPERTY: buildIsIndex({ V: expr.property })
+      });
+    };
+  })();
 
   function isIndex(n) {
     return (
@@ -99,6 +111,9 @@ export default function({ types: t, template }) {
             if(isIndex(p)) {
               // a[0], a["1"], not a[''], a['02']
               replacement = buildIdentfierIndexer(node);
+            } else if(t.isIdentifier(p)) {
+              // a[b]
+              replacement = buildIdentifierProperty(node);
             }
           }
 

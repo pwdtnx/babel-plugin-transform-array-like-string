@@ -1,0 +1,2 @@
+(typeof a === 'string' || Object.prototype.toString.call(a) === '[object String]') && (typeof b === 'number' || Object.prototype.toString.call(b) === '[object Number]' || (typeof b === 'string' || Object.prototype.toString.call(b) === '[object String]') && (+b).toString() === b) && +b === +b ? a.charAt(b) : a[b];
+a.b;
