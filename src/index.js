@@ -3,6 +3,15 @@ import _isNaN from 'lodash.isnan';
 export default function({ types: t, template }) {
   const buildStringIndexer = template(`STRING.charAt(INDEX)`);
 
+  function isIndex(n) {
+    return (
+      t.isNumericLiteral(n) ||
+      (t.isStringLiteral(n) &&
+       (+n.value).toString() === n.value &&
+       !_isNaN(+n.value))
+    );
+  }
+
   return {
     visitor: {
       MemberExpression: {
@@ -20,9 +29,8 @@ export default function({ types: t, template }) {
           } = node;
 
           if(t.isStringLiteral(o)) {
-            if(t.isNumericLiteral(p) ||
-               t.isStringLiteral(p) && !_isNaN(+p.value)) {
-              // "str"[0], "str"["1"]
+            if(isIndex(p)) {
+              // "str"[0], "str"["1"], not "str"[''], "str"['02']
               path.replaceWith(
                 buildStringIndexer({
                   STRING: o,
