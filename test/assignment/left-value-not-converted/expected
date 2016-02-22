@@ -1,0 +1,2 @@
+a[0] = "";
+a[1] = typeof a === 'string' || Object.prototype.toString.call(a) === '[object String]' ? a.charAt(0) : a[0];

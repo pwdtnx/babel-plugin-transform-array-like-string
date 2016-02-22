@@ -42,6 +42,11 @@ export default function({ types: t, template }) {
         exit(path) {
           const { node, parent, scope } = path;
 
+          // skip if left value
+          if(t.isAssignmentExpression(parent) && node === parent.left) {
+            return;
+          }
+
           // skip if dotted notation
           if(!node.computed) {
             return;
