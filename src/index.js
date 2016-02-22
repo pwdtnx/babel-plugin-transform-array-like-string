@@ -4,6 +4,17 @@ const traversed = new WeakSet();
 
 export default function({ types: t, template }) {
   const buildIsString = template(`typeof V === 'string' || Object.prototype.toString.call(V) === '[object String]'`);
+  const buildIsNumber = template(`typeof V === 'number' || Object.prototype.toString.call(V) === '[object Number]'`);
+  const buildIsIndex = (() => {
+    const tmpl = template(`(ISNUMBER || (ISSTRING && (+V).toString() === V)) && +V === +V`);
+    return ({ V }) => {
+      return tmpl({
+        V,
+        ISNUMBER: buildIsNumber({ V }),
+        ISSTRING: buildIsString({ V }),
+      });
+    };
+  })();
 
   const buildStringIndexer = (() => {
     const tmpl = template(`STRING.charAt(INDEX)`);
@@ -12,6 +23,17 @@ export default function({ types: t, template }) {
         STRING: expr.object,
         INDEX: t.NumericLiteral(+expr.property.value)
       })
+    };
+  })();
+  const buildStringProperty = (() => {
+    const tmpl = template(`ISINDEX ? STRING.charAt(PROPERTY) : MEMBEREXPRESSION`);
+    return (expr) => {
+      return tmpl({
+        STRING: expr.object,
+        PROPERTY: expr.property,
+        MEMBEREXPRESSION: expr,
+        ISINDEX: buildIsIndex({ V: expr.property })
+      });
     };
   })();
 
@@ -69,6 +91,9 @@ export default function({ types: t, template }) {
             if(isIndex(p)) {
               // "str"[0], "str"["1"], not "str"[''], "str"['02']
               replacement = buildStringIndexer(node);
+            } else if(t.isIdentifier(p)) {
+              // "s"[a]
+              replacement = buildStringProperty(node);
             }
           } else if(t.isIdentifier(o)) {
             if(isIndex(p)) {
