@@ -9,6 +9,11 @@ export default function({ types: t, template }) {
         exit(path) {
           const { node, parent, scope } = path;
 
+          // skip if dotted notation
+          if(!node.computed) {
+            return;
+          }
+
           const {
             object: o,
             property: p
