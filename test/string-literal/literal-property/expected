@@ -1,0 +1,4 @@
+"s".charAt(0);
+"s".charAt(1);
+"s"["b"];
+"s"[null];
