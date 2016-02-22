@@ -1,0 +1,6 @@
+typeof a === 'string' || Object.prototype.toString.call(a) === '[object String]' ? a.charAt(0) : a[0];
+typeof a === 'string' || Object.prototype.toString.call(a) === '[object String]' ? a.charAt(1) : a["1"];
+a["02"];
+a["b"];
+a[null];
+a[''];
