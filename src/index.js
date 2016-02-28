@@ -1,4 +1,5 @@
 const traversed = new WeakSet();
+const statements = new WeakMap();
 
 export default function({ types: t, template }) {
   const buildIsString = template(`typeof V === 'string' || Object.prototype.toString.call(V) === '[object String]'`);
@@ -68,6 +69,25 @@ export default function({ types: t, template }) {
     );
   }
 
+  function getParentStatement(path) {
+    let current = path
+    let { parentPath, parentKey } = path;
+
+    while(parentPath != null &&
+      parentPath.parentPath != null &&
+      !statements.has(current.node)
+    ) {
+      parentKey = current.parentKey;
+      current = parentPath;
+      parentPath = parentPath.parentPath;
+    }
+
+    return {
+      parent: current,
+      key: parentKey
+    };
+  }
+
   return {
     visitor: {
       MemberExpression: {
@@ -113,11 +133,45 @@ export default function({ types: t, template }) {
               // a[b]
               replacement = buildIdentifierProperty(node);
             }
+          } else {
+            const id = scope.generateUidIdentifierBasedOnNode(node);
+            const factorVar = t.variableDeclarator(id, node.object);
+            const factorDeclare = t.variableDeclaration('let', [ factorVar ]);
+            const factoredMember = t.memberExpression(
+              id,
+              node.property,
+              true
+            );
+
+            const { parent, key } = getParentStatement(path);
+            const nodes = statements.get(parent.node);
+            if(nodes != null) {
+              nodes[key].push(factorDeclare);
+            }
+
+            replacement = factoredMember;
           }
 
           if(replacement) {
             path.replaceWith(replacement);
           }
+        }
+      },
+      ExpressionStatement: {
+        enter({ node }) {
+          statements.set(node, {
+            expression: []
+          });
+        },
+        exit(path) {
+          const { node } = path;
+          const { expression } = statements.get(node, {
+            expression: []
+          });
+
+          path.insertBefore(expression);
+
+          statements.delete(node);
         }
       }
     }
