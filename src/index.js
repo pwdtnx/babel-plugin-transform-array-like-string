@@ -136,7 +136,6 @@ export default function({ types: t, template }) {
           } else {
             const id = scope.generateUidIdentifierBasedOnNode(node);
             const factorVar = t.variableDeclarator(id, node.object);
-            const factorDeclare = t.variableDeclaration('let', [ factorVar ]);
             const factoredMember = t.memberExpression(
               id,
               node.property,
@@ -146,7 +145,7 @@ export default function({ types: t, template }) {
             const { parent, key } = getParentStatement(path);
             const nodes = statements.get(parent.node);
             if(nodes != null) {
-              nodes[key].push(factorDeclare);
+              nodes[key].push(factorVar);
             }
 
             replacement = factoredMember;
@@ -169,7 +168,11 @@ export default function({ types: t, template }) {
             expression: []
           });
 
-          path.insertBefore(expression);
+          path.insertBefore([
+            ...expression.map((n) => {
+              return t.variableDeclaration('let', [n])
+            })
+          ]);
 
           statements.delete(node);
         }
