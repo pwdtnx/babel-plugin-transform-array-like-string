@@ -176,6 +176,51 @@ export default function({ types: t, template }) {
 
           statements.delete(node);
         }
+      },
+      ForStatement: {
+        enter({ node }) {
+          statements.set(node, {
+            init: [],
+            test: [],
+            update: []
+          });
+        },
+        exit(path) {
+          const { node } = path;
+          const { init, test, update } = statements.get(node, {
+            init: [],
+            test: [],
+            update: []
+          });
+
+          path.ensureBlock();
+
+          node.body.body = [
+            ...node.body.body,
+            ...update.map((n) => {
+              return t.assignmentExpression('=', n.id, n.init);
+            }),
+            ...test.map((n) => {
+              return t.assignmentExpression('=', n.id, n.init);
+            }),
+          ];
+
+          path.insertBefore([
+            ...init.map((n) => {
+              return t.variableDeclaration('let', [n])
+            }),
+            ...test.map((n) => {
+              return t.variableDeclaration('let', [n])
+            }),
+            ...update.map((n) => {
+              return t.variableDeclaration('let', [
+                t.variableDeclarator(n.id)
+              ])
+            })
+          ]);
+
+          statements.delete(node);
+        }
       }
     }
   };

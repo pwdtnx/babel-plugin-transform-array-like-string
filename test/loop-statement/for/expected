@@ -1,0 +1,36 @@
+let _ = b = c;
+
+for (a = typeof _ === 'string' || Object.prototype.toString.call(_) === '[object String]' ? _.charAt(0) : _[0];;) {}
+
+let _2 = b = c;
+
+for (; a = typeof _2 === 'string' || Object.prototype.toString.call(_2) === '[object String]' ? _2.charAt(0) : _2[0];) {
+  _2 = b = c
+}
+
+let _3;
+
+for (;; a = typeof _3 === 'string' || Object.prototype.toString.call(_3) === '[object String]' ? _3.charAt(0) : _3[0]) {
+  _3 = b = c
+}
+for (;;) {
+  let _4 = b = c;
+
+  a = typeof _4 === 'string' || Object.prototype.toString.call(_4) === '[object String]' ? _4.charAt(0) : _4[0];
+}for (;;) {
+  let _5 = b = c;
+
+  a = typeof _5 === 'string' || Object.prototype.toString.call(_5) === '[object String]' ? _5.charAt(0) : _5[0];
+}
+
+let _f$ = f();
+
+let _f$2 = f();
+
+let _f$3;
+
+for (a = typeof _f$ === 'string' || Object.prototype.toString.call(_f$) === '[object String]' ? _f$.charAt(0) : _f$[0]; a < (typeof _f$2 === 'string' || Object.prototype.toString.call(_f$2) === '[object String]' ? _f$2.charAt(1) : _f$2[1]); a = typeof _f$3 === 'string' || Object.prototype.toString.call(_f$3) === '[object String]' ? _f$3.charAt(2) : _f$3[2]) {
+  c = 1;
+  _f$3 = f()
+  _f$2 = f()
+}
