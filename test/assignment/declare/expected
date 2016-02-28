@@ -1,0 +1,13 @@
+let x = typeof a === 'string' || Object.prototype.toString.call(a) === '[object String]' ? a.charAt(0) : a[0];
+let y = (typeof b === 'string' || Object.prototype.toString.call(b) === '[object String]') && (typeof x === 'number' || Object.prototype.toString.call(x) === '[object Number]' || (typeof x === 'string' || Object.prototype.toString.call(x) === '[object String]') && (+x).toString() === x) && +x === +x ? b.charAt(x) : b[x];
+var _y = typeof a === 'string' || Object.prototype.toString.call(a) === '[object String]' ? a.charAt(0) : a[0],
+    z = (typeof _y === 'string' || Object.prototype.toString.call(_y) === '[object String]') && (typeof y === 'number' || Object.prototype.toString.call(y) === '[object Number]' || (typeof y === 'string' || Object.prototype.toString.call(y) === '[object String]') && (+y).toString() === y) && +y === +y ? _y.charAt(y) : _y[y];
+let _x = (typeof b === 'string' || Object.prototype.toString.call(b) === '[object String]') && (typeof z === 'number' || Object.prototype.toString.call(z) === '[object Number]' || (typeof z === 'string' || Object.prototype.toString.call(z) === '[object String]') && (+z).toString() === z) && +z === +z ? b.charAt(z) : b[z],
+    w = (typeof _x === 'string' || Object.prototype.toString.call(_x) === '[object String]') && (typeof x === 'number' || Object.prototype.toString.call(x) === '[object Number]' || (typeof x === 'string' || Object.prototype.toString.call(x) === '[object String]') && (+x).toString() === x) && +x === +x ? _x.charAt(x) : _x[x];
+const _y2 = typeof a === 'string' || Object.prototype.toString.call(a) === '[object String]' ? a.charAt(0) : a[0],
+      _x2 = (typeof b === 'string' || Object.prototype.toString.call(b) === '[object String]') && (typeof z === 'number' || Object.prototype.toString.call(z) === '[object Number]' || (typeof z === 'string' || Object.prototype.toString.call(z) === '[object String]') && (+z).toString() === z) && +z === +z ? b.charAt(z) : b[z],
+      s = 0,
+      u = (typeof _y2 === 'string' || Object.prototype.toString.call(_y2) === '[object String]') && (typeof y === 'number' || Object.prototype.toString.call(y) === '[object Number]' || (typeof y === 'string' || Object.prototype.toString.call(y) === '[object String]') && (+y).toString() === y) && +y === +y ? _y2.charAt(y) : _y2[y],
+      r = 0,
+      v = (typeof _x2 === 'string' || Object.prototype.toString.call(_x2) === '[object String]') && (typeof x === 'number' || Object.prototype.toString.call(x) === '[object Number]' || (typeof x === 'string' || Object.prototype.toString.call(x) === '[object String]') && (+x).toString() === x) && +x === +x ? _x2.charAt(x) : _x2[x],
+      t = 0;

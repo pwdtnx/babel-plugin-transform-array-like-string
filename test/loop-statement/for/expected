@@ -13,6 +13,7 @@ let _3;
 for (;; a = typeof _3 === 'string' || Object.prototype.toString.call(_3) === '[object String]' ? _3.charAt(0) : _3[0]) {
   _3 = b = c
 }
+
 for (;;) {
   let _4 = b = c;
 
@@ -33,4 +34,8 @@ for (a = typeof _f$ === 'string' || Object.prototype.toString.call(_f$) === '[ob
   c = 1;
   _f$3 = f()
   _f$2 = f()
+}
+
+for (let _f$4 = f(), _k = typeof _f$4 === 'string' || Object.prototype.toString.call(_f$4) === '[object String]' ? _f$4.charAt(0) : _f$4[0], _f$5 = f(), _k2 = typeof _f$5 === 'string' || Object.prototype.toString.call(_f$5) === '[object String]' ? _f$5.charAt(1) : _f$5[1], i = (typeof _k === 'string' || Object.prototype.toString.call(_k) === '[object String]') && (typeof k === 'number' || Object.prototype.toString.call(k) === '[object Number]' || (typeof k === 'string' || Object.prototype.toString.call(k) === '[object String]') && (+k).toString() === k) && +k === +k ? _k.charAt(k) : _k[k], j = (typeof _k2 === 'string' || Object.prototype.toString.call(_k2) === '[object String]') && (typeof k === 'number' || Object.prototype.toString.call(k) === '[object Number]' || (typeof k === 'string' || Object.prototype.toString.call(k) === '[object String]') && (+k).toString() === k) && +k === +k ? _k2.charAt(k) : _k2[k]; a < j; a++) {
+  continue;
 }

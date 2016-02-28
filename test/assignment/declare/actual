@@ -1,0 +1,5 @@
+let x = a[0];
+let y = b[x];
+var z = a[0][y];
+let w = b[z][x];
+const s = 0, u = a[0][y], r = 0, v = b[z][x], t = 0;

@@ -177,6 +177,26 @@ export default function({ types: t, template }) {
           statements.delete(node);
         }
       },
+      VariableDeclaration: {
+        enter({ node }) {
+          statements.set(node, {
+            declarations: []
+          });
+        },
+        exit(path) {
+          const { node } = path;
+          const { declarations } = statements.get(node, {
+            declarations: []
+          });
+
+          node.declarations = [
+            ...declarations,
+            ...node.declarations
+          ];
+
+          statements.delete(node);
+        }
+      },
       ForStatement: {
         enter({ node }) {
           statements.set(node, {

@@ -1,9 +1,17 @@
 for(a = (b = c)[0]; ; );
+
 for(; a = (b = c)[0]; );
+
 for(; ; a = (b = c)[0]);
+
 for(;;) a = (b = c)[0] ;
+
 for(;;){a = (b = c)[0];}
 
 for(a = f()[0]; a < f()[1]; a = f()[2]) {
   c = 1;
+}
+
+for(let i = f()[0][k], j = f()[1][k]; a < j; a++) {
+  continue;
 }
