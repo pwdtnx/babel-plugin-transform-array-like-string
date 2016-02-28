@@ -221,6 +221,36 @@ export default function({ types: t, template }) {
 
           statements.delete(node);
         }
+      },
+      WhileStatement: {
+        enter({ node }) {
+          statements.set(node,{
+            test: []
+          });
+        },
+        exit(path) {
+          const { node } = path;
+          const { test } = statements.get(node, {
+            test: []
+          });
+
+          path.ensureBlock();
+
+          node.body.body = [
+            ...node.body.body,
+            ...test.map((n) => {
+              return t.assignmentExpression('=', n.id, n.init);
+            }),
+          ];
+
+          path.insertBefore([
+            ...test.map((n) => {
+              return t.variableDeclaration('let', [n])
+            })
+          ]);
+
+          statements.delete(node);
+        }
       }
     }
   };
