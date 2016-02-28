@@ -1,5 +1,3 @@
-import _isNaN from 'lodash.isnan';
-
 const traversed = new WeakSet();
 
 export default function({ types: t, template }) {
@@ -66,7 +64,7 @@ export default function({ types: t, template }) {
       t.isNumericLiteral(n) ||
       (t.isStringLiteral(n) &&
        (+n.value).toString() === n.value &&
-       !_isNaN(+n.value))
+       !Number.isNaN(+n.value))
     );
   }
 

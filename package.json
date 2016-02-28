@@ -6,9 +6,7 @@
   "directories": {
     "lib": "./lib"
   },
-  "dependencies": {
-    "lodash.isnan": "^3.0.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.5.1",
     "babel-core": "^6.5.2",
