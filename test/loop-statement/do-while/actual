@@ -1,0 +1,6 @@
+do {
+} while(a = (b = c)[i]);
+
+do {
+  i++;
+} while(a = (b = c)[i]);

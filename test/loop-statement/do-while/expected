@@ -1,0 +1,12 @@
+let _i;
+
+do {
+  _i = b = c
+} while (a = (typeof _i === 'string' || Object.prototype.toString.call(_i) === '[object String]') && (typeof i === 'number' || Object.prototype.toString.call(i) === '[object Number]' || (typeof i === 'string' || Object.prototype.toString.call(i) === '[object String]') && (+i).toString() === i) && +i === +i ? _i.charAt(i) : _i[i]);
+
+let _i2;
+
+do {
+  i++;
+  _i2 = b = c
+} while (a = (typeof _i2 === 'string' || Object.prototype.toString.call(_i2) === '[object String]') && (typeof i === 'number' || Object.prototype.toString.call(i) === '[object Number]' || (typeof i === 'string' || Object.prototype.toString.call(i) === '[object String]') && (+i).toString() === i) && +i === +i ? _i2.charAt(i) : _i2[i]);
